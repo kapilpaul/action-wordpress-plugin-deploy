@@ -40,12 +40,12 @@ echo "ℹ︎ ASSETS_DIR is $ASSETS_DIR"
 
 if [[ -z "$BUILD_DIR" ]] || [[ $BUILD_DIR == "./" ]]; then
 	BUILD_DIR=false
-elif [[ $BUILD_DIR == ./* ]]; then 
+elif [[ $BUILD_DIR == ./* ]]; then
 	BUILD_DIR=${BUILD_DIR:2}
 fi
 
 if [[ "$BUILD_DIR" != false ]]; then
-	if [[ $BUILD_DIR != /* ]]; then 
+	if [[ $BUILD_DIR != /* ]]; then
 		BUILD_DIR="${GITHUB_WORKSPACE%/}/${BUILD_DIR}"
 	fi
 	echo "ℹ︎ BUILD_DIR is $BUILD_DIR"
@@ -110,6 +110,8 @@ else
 	echo "ℹ︎ Copying files from build directory..."
 	rsync -rc "$BUILD_DIR" trunk/ --delete --delete-excluded
 fi
+
+echo "assets dir $GITHUB_WORKSPACE/$ASSETS_DIR/"
 
 # Copy dotorg assets to /assets
 if [[ -d "$GITHUB_WORKSPACE/$ASSETS_DIR/" ]]; then
